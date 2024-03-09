@@ -1,0 +1,10 @@
+server:
+  port: 8003
+
+logging:
+  level:
+    org.springframework: DEBUG
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://exactool:exactool@cluster0.7krxtbk.mongodb.net/testdb?retryWrites=true&w=majority
