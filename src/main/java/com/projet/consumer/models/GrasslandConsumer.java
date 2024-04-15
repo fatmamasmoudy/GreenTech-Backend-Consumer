@@ -21,24 +21,25 @@ public class GrasslandConsumer {
     @Id
     private String id;
     private String StringId ;
-    private String userNotesGrassland;
-    private Boolean withoutFireMang2;
-    static final int year3 = 5;
-    private Boolean withFireMang2;
-    static final int year4 = 5;
-    private int startYield2;
-    private int withoutYield2;
-    private int withYield2;
-    private int startAreaGrassland2;
-    private int withoutAreaGrassland2;
-    private Type typeWithoutAreaGrassland2;
-    private int withAreaGrassland2;
-    private Type typeWithAreaGrassland2;
-    private int withoutTotEmissionsGrassland2;
-    private int withTotEmissionsGrassland2;
-    private int balanceGrassland2;
-    private int withoutTotGrasslandSys;
-    private int withTotGrasslandSys;
-    private int balanceTotGrasslandSys;
+    private String descriptionGrassland;
+    private String startGrasslandManagement;
+    private String withoutGrasslandManagement;
+    private String withGrasslandManagement;
+    private Boolean withoutFireManagement;
+    static final int year = 5;
+    private Boolean withFireManagement;
+    static final int year2 = 5;
+    private Double startYield;
+    private Double withoutYield;
+    private Double withYield;
+    private Double startAreaGrassland;
+    private Double withoutAreaGrassland;
+    private Double withAreaGrassland;
+    private Double withoutTotEmissionsGrassland;
+    private Double withTotEmissionsGrassland;
+    private Double balanceGrassland;
+    private Double totGrasslandSystemWithout;
+    private Double totGrasslandSystemWith;
+    private Double totGrasslandSystemBalance;
 
 }

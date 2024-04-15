@@ -1,9 +1,6 @@
 package com.projet.consumer.config;
 
-import com.projet.consumer.models.dto.ForestManagement;
-import com.projet.consumer.models.dto.GrassLand;
-import com.projet.consumer.models.dto.OtherLandUseChanges;
-import com.projet.consumer.models.dto.ProjectDescription;
+import com.projet.consumer.models.dto.*;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.DoubleDeserializer;
 import org.apache.kafka.common.serialization.LongDeserializer;
@@ -126,6 +123,31 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String,GrassLand>
                 factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerGrassLandFactory());
+        return factory;
+    }
+
+
+    @Bean
+    @ConditionalOnMissingBean(name = "kafkaListenerContainerDeforestationFactory")
+    public ConsumerFactory<? super String, ? super Deforestation> consumerDeforestationFactory(){
+        Map<String, Object> props =new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG,"gruop-id");
+
+        props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
+        props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.USE_TYPE_INFO_HEADERS,false);
+        props.put(JsonDeserializer.VALUE_DEFAULT_TYPE,"com.projet.consumer.models.dto.Deforestation");
+
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Deforestation> kafkaListenerContainerDeforestationFactory(){
+        ConcurrentKafkaListenerContainerFactory<String,Deforestation>
+                factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerDeforestationFactory());
         return factory;
     }
 

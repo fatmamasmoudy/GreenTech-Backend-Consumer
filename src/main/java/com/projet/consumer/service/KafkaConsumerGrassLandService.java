@@ -33,7 +33,7 @@ public class KafkaConsumerGrassLandService {
         if (grass != null && "create".equals(grassLand.getEventType())) {
             try {
                 grassLandRepository.save(grass);
-                log.info("Forest Management saved: " + grass.getId());
+                log.info("Grassland saved: " + grass.getId());
             } catch (Exception e) {
                 log.error("Error saving Forest : " + e.getMessage());
                 // Handle the exception (e.g., log it, send a notification, etc.)
@@ -43,34 +43,34 @@ public class KafkaConsumerGrassLandService {
                 log.info("Updating grassLand with ID: " + grass.getId());
                 GrasslandConsumer existingGrassP = grassLandRepository.findById(XID).get();
 
-                existingGrassP.setUserNotesGrassland(grass.getUserNotesGrassland());
-                existingGrassP.setWithoutFireMang2(grass.getWithoutFireMang2());
-                existingGrassP.setWithFireMang2(grass.getWithFireMang2());
-                existingGrassP.setStartYield2(grass.getStartYield2());
-                existingGrassP.setWithoutYield2(grass.getWithoutYield2());
-                existingGrassP.setStartAreaGrassland2(grass.getStartAreaGrassland2());
-                existingGrassP.setWithYield2(grass.getWithYield2());
-                existingGrassP.setWithoutAreaGrassland2(grass.getWithoutAreaGrassland2());
-                existingGrassP.setTypeWithAreaGrassland2(grass.getTypeWithAreaGrassland2());
-                existingGrassP.setWithoutTotEmissionsGrassland2(grass.getWithoutTotEmissionsGrassland2());
-                existingGrassP.setWithAreaGrassland2(grass.getWithAreaGrassland2());
-                existingGrassP.setBalanceGrassland2(grass.getBalanceGrassland2());
-                existingGrassP.setWithoutTotGrasslandSys(grass.getWithoutTotGrasslandSys());
-                existingGrassP.setWithTotGrasslandSys(grass.getWithTotGrasslandSys());
-                existingGrassP.setBalanceTotGrasslandSys(grass.getBalanceTotGrasslandSys());
-
-
+                existingGrassP.setDescriptionGrassland(grass.getDescriptionGrassland());
+                existingGrassP.setStartGrasslandManagement(grass.getStartGrasslandManagement());
+                existingGrassP.setWithoutGrasslandManagement(grass.getWithoutGrasslandManagement());
+                existingGrassP.setWithGrasslandManagement(grass.getWithGrasslandManagement());
+                existingGrassP.setWithFireManagement(grass.getWithFireManagement());
+                existingGrassP.setStartYield(grass.getStartYield());
+                existingGrassP.setWithoutYield(grass.getWithoutYield());
+                existingGrassP.setWithYield(grass.getWithYield());
+                existingGrassP.setStartAreaGrassland(grass.getStartAreaGrassland());
+                existingGrassP.setWithoutAreaGrassland(grass.getWithoutAreaGrassland());
+                existingGrassP.setWithAreaGrassland(grass.getWithAreaGrassland());
+                existingGrassP.setWithoutTotEmissionsGrassland(grass.getWithoutTotEmissionsGrassland());
+                existingGrassP.setWithTotEmissionsGrassland(grass.getWithTotEmissionsGrassland());
+                existingGrassP.setBalanceGrassland(grass.getBalanceGrassland());
+                existingGrassP.setTotGrasslandSystemWithout(grass.getTotGrasslandSystemWithout());
+                existingGrassP.setTotGrasslandSystemWith(grass.getTotGrasslandSystemWith());
+                existingGrassP.setTotGrasslandSystemBalance(grass.getTotGrasslandSystemBalance());
                 grassLandRepository.save(existingGrassP);
-                log.info("forest management saved: " + existingGrassP);
+                log.info("Grassland saved: " + existingGrassP);
             } catch (Exception e) {
                 log.error("Entity with ID: " + grass.getId() + " not found in the database.");
-                log.error("Error updating project description: " + e.getMessage());
+                log.error("Error updating Grassland: " + e.getMessage());
                 // Handle the exception (e.g., log it, send a notification, etc.)
             }
         } else if ("delete".equals(grassLand.getEventType())) {
             // Handle delete event logic
             try {
-                log.info("Deleting project description with ID: " + grass.getId());
+                log.info("Deleting Grassland with ID: " + grass.getId());
                 // Find the existing project description in the database using its ID
                 Optional<GrasslandConsumer> existingGrassLandOptional = grassLandRepository.findById(XID);
 
@@ -78,13 +78,13 @@ public class KafkaConsumerGrassLandService {
                 if (existingGrassLandOptional.isPresent()) {
                     // If it exists, delete the project description from the database
                     grassLandRepository.deleteById(XID);
-                    log.info("Project description deleted with ID: " + XID);
+                    log.info("Grassland deleted with ID: " + XID);
                 } else {
                     // If the project description with the specified ID is not found in the database, log an error
                     log.error("Entity with ID: " + XID + " not found in the database.");
                 }
             } catch (Exception e) {
-                log.error("Error deleting project description: " + e.getMessage());
+                log.error("Error deleting Grassland: " + e.getMessage());
                 // Handle the exception (e.g., log it, send a notification, etc.)
             }
         } else {
